@@ -1,0 +1,13 @@
+Flask
+Flask-Cors
+Flask-JWT-Extended
+Flask-SQLAlchemy
+PyMySQL
+python-dotenv
+spacy
+scikit-learn
+PyPDF2
+python-docx
+reportlab
+cryptography
+google-generativeai

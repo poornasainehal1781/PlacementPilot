@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/resume_analyzer.db
+backend/reports/*
+!backend/reports/.gitkeep
+
+# Node / React
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+.eslintcache
+
+# Environment / Keys
+.env
+backend/.env
+frontend/.env
+.DS_Store
+Thumbs.db
