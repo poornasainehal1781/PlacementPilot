@@ -11,39 +11,38 @@ export default function Navbar() {
     if (!user) return null;
 
     const isActive = (path) => location.pathname === path;
-    const activeClass = "bg-indigo-600/30 text-indigo-400 border border-indigo-500/30";
-    const inactiveClass = "text-slate-300 hover:bg-slate-800/50 hover:text-white border border-transparent";
-
+    const activeClass = "bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 shadow-md shadow-indigo-500/5";
+    const inactiveClass = "text-slate-300 hover:bg-slate-800/30 hover:text-white border border-transparent";
     return (
-        <nav className="sticky top-0 z-50 backdrop-blur-md bg-slate-950/80 border-b border-slate-800/80 px-6 py-4">
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="sticky top-0 z-50 w-full px-4 pt-4 pb-2 max-w-7xl mx-auto">
+            <nav className="backdrop-blur-xl bg-slate-950/40 border border-slate-800/40 px-6 py-3.5 rounded-2xl shadow-2xl shadow-slate-950/60 flex items-center justify-between">
                 {/* Logo */}
-                <Link to="/" className="flex items-center gap-2 text-xl font-bold tracking-tight text-white">
-                    <div className="bg-gradient-to-tr from-indigo-600 to-emerald-500 p-2 rounded-xl text-white shadow-lg shadow-indigo-500/20">
+                <Link to="/" className="flex items-center gap-2 text-xl font-bold tracking-tight text-white hover:opacity-90 transition-opacity">
+                    <div className="bg-gradient-to-tr from-indigo-500 to-emerald-400 p-2 rounded-xl text-white shadow-lg shadow-indigo-500/20">
                         <Briefcase className="w-5 h-5" />
                     </div>
-                    <span>TalentForge <span className="bg-gradient-to-r from-indigo-400 to-emerald-400 bg-clip-text text-transparent">AI</span></span>
+                    <span className="font-heading">TalentForge <span className="bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">AI</span></span>
                 </Link>
 
                 {/* Nav Links */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
                     <Link
                         to="/"
-                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${isActive('/') ? activeClass : inactiveClass}`}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${isActive('/') ? activeClass : inactiveClass}`}
                     >
                         <LayoutDashboard className="w-4 h-4" />
                         <span>Dashboard</span>
                     </Link>
                     <Link
                         to="/analyze"
-                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${isActive('/analyze') ? activeClass : inactiveClass}`}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${isActive('/analyze') ? activeClass : inactiveClass}`}
                     >
                         <FileText className="w-4 h-4" />
                         <span>Analyze Resume</span>
                     </Link>
                     <Link
                         to="/chat"
-                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${isActive('/chat') ? activeClass : inactiveClass}`}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${isActive('/chat') ? activeClass : inactiveClass}`}
                     >
                         <MessageSquare className="w-4 h-4" />
                         <span>AI Chat Coach</span>
@@ -53,10 +52,10 @@ export default function Navbar() {
                 {/* Profile / Logout */}
                 <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2 border-r border-slate-800 pr-4">
-                        <div className="w-8 h-8 rounded-full bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 font-semibold uppercase">
+                        <div className="w-8 h-8 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-300 font-semibold uppercase">
                             {user.username.charAt(0)}
                         </div>
-                        <span className="text-sm font-medium text-slate-300 hidden md:block">
+                        <span className="text-sm font-medium text-slate-350 hidden md:block">
                             {user.username}
                         </span>
                     </div>
@@ -66,13 +65,13 @@ export default function Navbar() {
                             logout();
                             navigate('/login');
                         }}
-                        className="flex items-center gap-2 bg-slate-900 border border-slate-800 hover:border-red-500/30 hover:bg-red-500/10 text-slate-300 hover:text-red-400 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200"
+                        className="flex items-center gap-2 bg-slate-900/60 border border-slate-800 hover:border-red-500/30 hover:bg-red-500/10 text-slate-300 hover:text-red-400 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer"
                     >
                         <LogOut className="w-4 h-4" />
                         <span className="hidden md:block">Logout</span>
                     </button>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     );
 }

@@ -1,12 +1,91 @@
 @import "tailwindcss";
 
+@theme {
+  /* Premium typography config */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+
+  /* Redefine Indigo -> Shifting Amethyst / Fuchsia */
+  --color-indigo-50: #fdf4ff;
+  --color-indigo-100: #fae8ff;
+  --color-indigo-200: #f5d0fe;
+  --color-indigo-300: #f0abfc;
+  --color-indigo-400: #e879f9;
+  --color-indigo-500: #d946ef; /* Vibrant Neon Magenta */
+  --color-indigo-600: #c084fc; /* Electric Purple */
+  --color-indigo-700: #a855f7; /* Royal Violet */
+  --color-indigo-800: #8b5cf6; /* Cyber Blue-Purple */
+  --color-indigo-900: #6d28d9;
+  --color-indigo-950: #4c1d95;
+
+  /* Redefine Emerald -> Neon Turquoise / Cyan */
+  --color-emerald-50: #ecfeff;
+  --color-emerald-100: #cffafe;
+  --color-emerald-200: #a5f3fc;
+  --color-emerald-300: #67e8f9;
+  --color-emerald-400: #22d3ee;
+  --color-emerald-500: #06b6d4; /* Electric Cyan */
+  --color-emerald-600: #0891b2;
+  --color-emerald-700: #0e7490;
+  --color-emerald-800: #155e75;
+  --color-emerald-900: #164e63;
+  --color-emerald-950: #083344;
+
+  /* Deep Space Obsidian Base Colors */
+  --color-slate-950: #04020d; /* Extra dark violet */
+  --color-slate-900: #0a061b;
+  --color-slate-800: #140d34;
+  --color-slate-700: #211654;
+  --color-slate-650: #2b1f6d;
+  --color-slate-600: #3c2e91;
+  --color-slate-500: #594bb8;
+}
+
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100 font-sans antialiased min-h-screen selection:bg-indigo-500/30 selection:text-indigo-200;
-    background-image: radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.08) 0, transparent 50%),
-                      radial-gradient(at 50% 0%, rgba(16, 185, 129, 0.05) 0, transparent 50%),
-                      radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.08) 0, transparent 50%);
+    background-color: #04020d;
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  /* Shifting Nebula Ambient Glows */
+  body::before {
+    content: "";
+    position: fixed;
+    top: -15%;
+    left: -15%;
+    width: 130%;
+    height: 130%;
+    background-image: 
+      radial-gradient(circle at 10% 15%, rgba(217, 70, 239, 0.18) 0%, transparent 45%),
+      radial-gradient(circle at 85% 25%, rgba(6, 182, 212, 0.16) 0%, transparent 45%),
+      radial-gradient(circle at 50% 80%, rgba(244, 63, 94, 0.1) 0%, transparent 50%);
     background-attachment: fixed;
+    z-index: -10;
+    pointer-events: none;
+  }
+
+  /* Cyber Grid overlay */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(217, 70, 239, 0.006) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(217, 70, 239, 0.006) 1px, transparent 1px);
+    background-size: 70px 70px;
+    z-index: -9;
+    pointer-events: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -17,38 +96,74 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-slate-950;
+  background: #04020d;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-800 rounded-full hover:bg-slate-700 transition-colors;
+  background: #140d34;
+  border-radius: 9999px;
+  border: 2px solid #04020d;
 }
 
-/* Glassmorphism Styles */
+::-webkit-scrollbar-thumb:hover {
+  background: #211654;
+}
+
+/* Premium Neon Glassmorphic Card */
 .glass-panel {
-  @apply bg-slate-900/60 backdrop-blur-md border border-slate-800/80 rounded-2xl shadow-xl shadow-slate-950/20;
+  background: rgba(10, 6, 27, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(217, 70, 239, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+  border-radius: 24px;
+  position: relative;
 }
 
 .glass-panel-hover {
-  @apply transition-all duration-300 hover:border-indigo-500/30 hover:bg-slate-900/80 hover:shadow-indigo-500/5;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Custom animations */
+.glass-panel-hover:hover {
+  border-color: rgba(217, 70, 239, 0.35);
+  background: rgba(10, 6, 27, 0.75);
+  box-shadow: 0 16px 48px 0 rgba(217, 70, 239, 0.12), 0 0 24px 0 rgba(6, 182, 212, 0.04);
+  transform: translateY(-3px);
+}
+
+/* Cyber Glow Buttons */
+.btn-cyber-primary {
+  background: linear-gradient(135deg, #d946ef 0%, #8b5cf6 50%, #06b6d4 100%);
+  background-size: 200% auto;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px 0 rgba(217, 70, 239, 0.25);
+  cursor: pointer;
+}
+
+.btn-cyber-primary:hover {
+  background-position: right center;
+  box-shadow: 0 8px 30px 0 rgba(217, 70, 239, 0.4), 0 0 20px 0 rgba(6, 182, 212, 0.2);
+  transform: translateY(-1.5px);
+}
+
+/* Animations */
 @keyframes pulse-ring {
   0% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+    box-shadow: 0 0 0 0 rgba(217, 70, 239, 0.5);
   }
   70% {
     transform: scale(1);
-    box-shadow: 0 0 0 12px rgba(99, 102, 241, 0);
+    box-shadow: 0 0 0 15px rgba(217, 70, 239, 0);
   }
   100% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+    box-shadow: 0 0 0 0 rgba(217, 70, 239, 0);
   }
 }
 
 .animate-pulse-ring {
-  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: pulse-ring 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
+

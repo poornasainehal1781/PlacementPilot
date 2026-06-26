@@ -247,33 +247,47 @@ export default function AnalysisResult() {
                     {/* Score & Profile Summary Panels */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {/* Radial Gauge Card */}
-                        <Card hover={false} className="flex flex-col items-center justify-center py-8">
-                            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-6">Overall ATS Score</p>
+                        <Card hover={false} className="flex flex-col items-center justify-center py-8 border border-slate-800/40 shadow-xl bg-slate-950/40">
+                            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-6 font-heading">Overall ATS Score</p>
                             <div className="relative w-36 h-36 flex items-center justify-center">
                                 <svg className="w-full h-full transform -rotate-90">
+                                    <defs>
+                                        <linearGradient id="scoreGaugeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stopColor="#d946ef" />
+                                            <stop offset="100%" stopColor="#06b6d4" />
+                                        </linearGradient>
+                                        <filter id="glow">
+                                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                            <feMerge>
+                                                <feMergeNode in="coloredBlur"/>
+                                                <feMergeNode in="SourceGraphic"/>
+                                            </feMerge>
+                                        </filter>
+                                    </defs>
                                     <circle
                                         cx="72"
                                         cy="72"
-                                        r="64"
-                                        className="stroke-slate-800"
-                                        strokeWidth="8"
+                                        r="60"
+                                        stroke="rgba(255,255,255,0.03)"
+                                        strokeWidth="9"
                                         fill="transparent"
                                     />
                                     <circle
                                         cx="72"
                                         cy="72"
-                                        r="64"
-                                        stroke={scoreStrokeClass}
-                                        strokeWidth="8"
+                                        r="60"
+                                        stroke="url(#scoreGaugeGrad)"
+                                        strokeWidth="9"
                                         fill="transparent"
-                                        strokeDasharray={2 * Math.PI * 64}
-                                        strokeDashoffset={2 * Math.PI * 64 * (1 - score / 100)}
+                                        strokeDasharray={2 * Math.PI * 60}
+                                        strokeDashoffset={2 * Math.PI * 60 * (1 - score / 100)}
                                         strokeLinecap="round"
+                                        filter="url(#glow)"
                                         className="transition-all duration-1000 ease-out"
                                     />
                                 </svg>
                                 <div className="absolute flex flex-col items-center justify-center">
-                                    <span className={`text-3xl font-black ${scoreColorClass}`}>{score}%</span>
+                                    <span className="text-3xl font-black bg-gradient-to-r from-fuchsia-400 to-cyan-400 bg-clip-text text-transparent font-heading">{score}%</span>
                                     <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider mt-0.5">Rating</span>
                                 </div>
                             </div>

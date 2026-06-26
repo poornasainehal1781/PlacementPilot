@@ -90,29 +90,29 @@ export default function UploadAnalyze() {
 
     if (loading) {
         return (
-            <div className="max-w-4xl mx-auto px-6 py-20 flex flex-col items-center justify-center min-h-[70vh]">
+            <div className="max-w-4xl mx-auto px-6 py-20 flex flex-col items-center justify-center min-h-[70vh] relative z-10 animate-fade-in">
                 <div className="w-24 h-24 relative mb-8 flex items-center justify-center">
-                    <div className="absolute inset-0 border-4 border-indigo-500/20 rounded-full"></div>
+                    <div className="absolute inset-0 border-4 border-indigo-500/10 rounded-full"></div>
                     <div className="absolute inset-0 border-4 border-t-indigo-500 rounded-full animate-spin"></div>
                     <BrainCircuit className="w-8 h-8 text-indigo-400 animate-pulse" />
                 </div>
                 
-                <h3 className="text-xl font-bold text-slate-200 mb-2">Analyzing Optimization Score</h3>
-                <p className="text-sm text-indigo-400 font-semibold bg-indigo-500/10 px-4 py-1.5 rounded-full border border-indigo-500/20 mb-8 animate-pulse">
+                <h3 className="text-xl font-bold text-slate-200 mb-2 font-heading">Analyzing Optimization Score</h3>
+                <p className="text-sm text-indigo-300 font-semibold bg-indigo-550/10 px-4 py-1.5 rounded-full border border-indigo-500/20 mb-8 animate-pulse">
                     Step {loadingStep + 1} of {steps.length}
                 </p>
                 
-                <div className="w-full max-w-md bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+                <div className="w-full max-w-md bg-slate-950/40 border border-slate-800/40 p-6 rounded-2xl backdrop-blur-xl">
                     <div className="space-y-4">
                         {steps.map((step, idx) => (
                             <div key={idx} className={`flex items-center gap-3 transition-opacity duration-300 ${
                                 idx < loadingStep ? 'text-emerald-400 opacity-100' :
                                 idx === loadingStep ? 'text-indigo-400 opacity-100' :
-                                'text-slate-600 opacity-50'
+                                'text-slate-650 opacity-50'
                             }`}>
                                 <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${
-                                    idx < loadingStep ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
-                                    idx === loadingStep ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 animate-pulse-ring' :
+                                    idx < loadingStep ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
+                                    idx === loadingStep ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 animate-pulse-ring' :
                                     'bg-slate-950 text-slate-600 border border-slate-800'
                                 }`}>
                                     {idx < loadingStep ? "✓" : idx + 1}
@@ -127,10 +127,10 @@ export default function UploadAnalyze() {
     }
 
     return (
-        <div className="max-w-7xl mx-auto px-6 py-10 space-y-8">
+        <div className="max-w-7xl mx-auto px-6 py-10 space-y-8 relative z-10">
             <div>
-                <h1 className="text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
-                    <Sparkles className="w-7 h-7 text-indigo-400" />
+                <h1 className="text-3xl font-extrabold text-white tracking-tight flex items-center gap-2 font-heading">
+                    <Sparkles className="w-7 h-7 text-indigo-450 animate-pulse" />
                     <span>AI Resume Matcher</span>
                 </h1>
                 <p className="text-slate-400 text-sm mt-1">
@@ -141,11 +141,11 @@ export default function UploadAnalyze() {
             <form onSubmit={handleAnalyze} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Left Side: File Upload */}
                 <div className="space-y-6">
-                    <h3 className="text-base font-bold text-slate-200 flex items-center gap-2">
+                    <h3 className="text-base font-bold text-slate-200 flex items-center gap-2 font-heading">
                         <FileText className="w-4 h-4 text-slate-400" />
                         <span>Step 1: Upload Resume</span>
                     </h3>
-                    <Card hover={false} className="p-8">
+                    <Card hover={false} className="p-8 backdrop-blur-xl bg-slate-950/40 border border-slate-800/40 shadow-2xl">
                         <FileUpload 
                             onFileSelect={setFile} 
                             file={file} 
@@ -157,11 +157,11 @@ export default function UploadAnalyze() {
 
                 {/* Right Side: Job Description Details */}
                 <div className="space-y-6">
-                    <h3 className="text-base font-bold text-slate-200 flex items-center gap-2">
+                    <h3 className="text-base font-bold text-slate-200 flex items-center gap-2 font-heading">
                         <PenTool className="w-4 h-4 text-slate-400" />
                         <span>Step 2: Enter Job Description</span>
                     </h3>
-                    <Card hover={false} className="p-8 space-y-5">
+                    <Card hover={false} className="p-8 space-y-5 backdrop-blur-xl bg-slate-950/40 border border-slate-800/40 shadow-2xl">
                         <div className="space-y-2">
                             <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
                                 Target Job Title
@@ -171,7 +171,7 @@ export default function UploadAnalyze() {
                                 value={jobTitle}
                                 onChange={(e) => setJobTitle(e.target.value)}
                                 placeholder="e.g. Full-Stack Software Engineer"
-                                className="w-full bg-slate-950 border border-slate-800 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl py-3 px-4 text-slate-200 placeholder-slate-650 outline-none transition-all text-sm"
+                                className="w-full bg-slate-950/80 border border-slate-800/80 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl py-3 px-4 text-slate-200 placeholder-slate-600 outline-none transition-all duration-300 text-sm"
                                 required
                             />
                         </div>
@@ -185,7 +185,7 @@ export default function UploadAnalyze() {
                                 onChange={(e) => setJobDescription(e.target.value)}
                                 placeholder="Paste the complete job description text including qualifications, responsibilities, and skill requirements..."
                                 rows={8}
-                                className="w-full bg-slate-950 border border-slate-800 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl py-3 px-4 text-slate-200 placeholder-slate-650 outline-none transition-all text-sm resize-none"
+                                className="w-full bg-slate-950/80 border border-slate-800/80 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl py-3 px-4 text-slate-200 placeholder-slate-600 outline-none transition-all duration-300 text-sm resize-none"
                                 required
                             />
                         </div>
@@ -198,7 +198,7 @@ export default function UploadAnalyze() {
 
                         <button
                             type="submit"
-                            className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-semibold py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-600/20 flex items-center justify-center gap-2 group"
+                            className="w-full btn-cyber-primary text-white font-semibold py-3.5 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 group cursor-pointer border border-indigo-500/25"
                         >
                             <Terminal className="w-4 h-4" />
                             <span>Analyze Match & Prepare</span>

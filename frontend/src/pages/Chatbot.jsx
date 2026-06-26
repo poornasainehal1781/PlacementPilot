@@ -114,12 +114,12 @@ export default function Chatbot() {
     const progressPercent = totalQuestions > 0 ? Math.round((currentQIndex / totalQuestions) * 100) : 0;
 
     return (
-        <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row gap-6 h-[85vh] animate-fade-in">
+        <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row gap-6 h-[85vh] animate-fade-in relative z-10">
             {/* Sidebar: Sessions & Analyzed Resumes List */}
             <div className="w-full md:w-80 shrink-0 flex flex-col gap-5 h-full">
                 {/* Session select card */}
-                <Card hover={false} className="flex-1 flex flex-col min-h-0 p-5">
-                    <h3 className="text-sm font-bold text-slate-200 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <Card hover={false} className="flex-1 flex flex-col min-h-0 p-5 bg-slate-950/40 border border-slate-800/40 shadow-2xl">
+                    <h3 className="text-sm font-bold text-slate-200 uppercase tracking-wider mb-4 flex items-center gap-2 font-heading">
                         <MessageSquare className="w-4 h-4 text-indigo-400" />
                         <span>Select Practice Target</span>
                     </h3>
@@ -130,11 +130,11 @@ export default function Chatbot() {
                         </div>
                     ) : history.length === 0 ? (
                         <div className="flex-1 flex flex-col items-center justify-center text-center p-4">
-                            <HelpCircle className="w-10 h-10 text-slate-600 mb-2" />
+                            <HelpCircle className="w-10 h-10 text-slate-650 mb-2" />
                             <p className="text-xs text-slate-400">Please analyze a resume to begin practicing.</p>
                             <button
                                 onClick={() => navigate('/analyze')}
-                                className="mt-4 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all"
+                                className="mt-4 btn-cyber-primary text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all border border-indigo-500/20"
                             >
                                 Analyze Resume
                             </button>
@@ -150,20 +150,20 @@ export default function Chatbot() {
                                     <button
                                         key={item.id}
                                         onClick={() => setSelectedAnalysis(item.id)}
-                                        className={`w-full text-left p-3.5 rounded-xl border text-xs transition-all flex flex-col gap-1.5 ${
+                                        className={`w-full text-left p-3.5 rounded-xl border text-xs transition-all duration-300 flex flex-col gap-1.5 cursor-pointer ${
                                             isSelected
-                                                ? 'bg-indigo-600/20 border-indigo-500/40 text-white'
-                                                : 'bg-slate-900 border-slate-800 hover:border-slate-700 text-slate-350 hover:text-slate-200'
+                                                ? 'bg-gradient-to-r from-indigo-500/10 to-fuchsia-500/10 border-indigo-500/40 text-white shadow-lg shadow-indigo-500/5'
+                                                : 'bg-slate-950/60 border-slate-800/80 hover:border-indigo-500/30 text-slate-350 hover:text-slate-200'
                                         }`}
                                     >
                                         <div className="flex justify-between items-start w-full">
-                                            <span className="font-bold truncate max-w-[170px]">{item.job_title}</span>
+                                            <span className="font-bold truncate max-w-[170px] font-heading">{item.job_title}</span>
                                             {isCompleted ? (
                                                 <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 font-bold shrink-0">Done</span>
                                             ) : matchingSession ? (
-                                                <span className="text-[10px] text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20 font-bold shrink-0">Active</span>
+                                                <span className="text-[10px] text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20 font-bold shrink-0 animate-pulse">Active</span>
                                             ) : (
-                                                 <span className="text-[10px] text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-850 font-semibold shrink-0">New</span>
+                                                 <span className="text-[10px] text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800 font-semibold shrink-0">New</span>
                                             )}
                                         </div>
                                         <span className="text-[10px] text-slate-500 truncate w-full">{item.resume_filename}</span>
@@ -178,41 +178,41 @@ export default function Chatbot() {
             {/* Chat Area */}
             <div className="flex-1 flex flex-col h-full">
                 {!selectedAnalysis ? (
-                    <Card hover={false} className="flex-1 flex flex-col items-center justify-center text-center p-8">
-                        <div className="bg-gradient-to-tr from-indigo-600 to-emerald-500 p-4 rounded-2xl text-white shadow-xl shadow-indigo-500/10 mb-4 animate-pulse">
+                    <Card hover={false} className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-slate-950/40 border border-slate-800/40 shadow-2xl">
+                        <div className="bg-gradient-to-tr from-indigo-500 via-fuchsia-500 to-emerald-400 p-4 rounded-2xl text-white shadow-xl shadow-indigo-500/10 mb-4 animate-pulse-ring">
                             <Sparkles className="w-10 h-10" />
                         </div>
-                        <h2 className="text-xl font-bold text-slate-200">AI Chat Interview Coach</h2>
+                        <h2 className="text-xl font-bold text-white font-heading">AI Chat Interview Coach</h2>
                         <p className="text-slate-400 text-sm max-w-sm mt-2 mb-6">
                             Practice interactive mock interviews based on the exact qualifications parsed in your resumes. Choose a practice target on the left to start!
                         </p>
                     </Card>
                 ) : startingSession ? (
-                    <Card hover={false} className="flex-1 flex items-center justify-center">
+                    <Card hover={false} className="flex-1 flex items-center justify-center bg-slate-950/40 border border-slate-800/40 shadow-2xl">
                         <div className="flex flex-col items-center gap-4">
                             <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
                             <p className="text-slate-400 text-sm font-medium">Entering AI interview coaching room...</p>
                         </div>
                     </Card>
                 ) : (
-                    <div className="flex-1 flex flex-col bg-slate-950/40 border border-slate-800 rounded-3xl overflow-hidden min-h-0 relative">
+                    <div className="flex-1 flex flex-col bg-slate-950/45 border border-slate-800/60 rounded-3xl overflow-hidden min-h-0 relative shadow-2xl">
                         {/* Chat Header */}
-                        <div className="bg-slate-900/60 backdrop-blur border-b border-slate-800/80 px-6 py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-4 shrink-0">
+                        <div className="bg-slate-950/50 backdrop-blur border-b border-slate-800/50 px-6 py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-4 shrink-0">
                             <div>
-                                <h3 className="text-base font-bold text-slate-200">Mock Interview Coach</h3>
+                                <h3 className="text-base font-bold text-slate-200 font-heading">Mock Interview Coach</h3>
                                 <p className="text-slate-500 text-xs mt-0.5">Resume-based practice questions</p>
                             </div>
                             
                             {/* Session progress bar */}
                             {totalQuestions > 0 && (
-                                <div className="flex items-center gap-3 w-full sm:w-48">
-                                    <div className="flex-1 h-1.5 bg-slate-950 rounded-full overflow-hidden border border-slate-850">
+                                <div className="flex items-center gap-3 w-full sm:w-56">
+                                    <div className="flex-1 h-1.5 bg-slate-950 rounded-full overflow-hidden border border-slate-800/80">
                                         <div 
-                                            className="h-full bg-gradient-to-r from-indigo-500 to-indigo-600 transition-all duration-300"
+                                            className="h-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 transition-all duration-300 shadow-[0_0_8px_rgba(217,70,239,0.3)]"
                                             style={{ width: `${progressPercent}%` }}
                                         />
                                     </div>
-                                    <span className="text-[10px] font-black text-indigo-400 shrink-0">
+                                    <span className="text-[10px] font-black text-indigo-300 shrink-0">
                                         {currentQIndex} / {totalQuestions} Qs
                                     </span>
                                 </div>
@@ -228,10 +228,10 @@ export default function Chatbot() {
                                 return (
                                     <div key={msg.id || index} className={`flex gap-3 max-w-[85%] ${isInterviewer ? 'mr-auto' : 'ml-auto flex-row-reverse'}`}>
                                         {/* Avatar icon */}
-                                        <div className={`w-8 h-8 rounded-xl shrink-0 flex items-center justify-center text-xs font-black uppercase ${
+                                        <div className={`w-8 h-8 rounded-xl shrink-0 flex items-center justify-center text-xs font-black uppercase shadow-sm ${
                                             isInterviewer 
-                                                ? 'bg-gradient-to-tr from-indigo-600 to-emerald-500 text-white' 
-                                                : 'bg-indigo-600/20 border border-indigo-500/20 text-indigo-400'
+                                                ? 'bg-gradient-to-tr from-indigo-500 to-fuchsia-500 text-white' 
+                                                : 'bg-indigo-500/10 border border-indigo-500/20 text-indigo-300'
                                         }`}>
                                             {isInterviewer ? 'AI' : 'You'}
                                         </div>
@@ -240,8 +240,8 @@ export default function Chatbot() {
                                             {/* Chat Bubble bubble */}
                                             <div className={`p-4 rounded-2xl text-sm leading-relaxed ${
                                                 isInterviewer 
-                                                    ? 'bg-slate-900 border border-slate-800 text-slate-200 rounded-tl-none' 
-                                                    : 'bg-indigo-600 text-white rounded-tr-none shadow-lg shadow-indigo-600/10'
+                                                    ? 'bg-slate-950/60 border border-slate-800/80 text-slate-200 rounded-tl-none shadow-md' 
+                                                    : 'bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white rounded-tr-none shadow-lg shadow-indigo-500/10'
                                             }`}>
                                                 {/* Format message lines nicely */}
                                                 {msg.message.split('\n').map((line, idx) => (
@@ -253,7 +253,7 @@ export default function Chatbot() {
 
                                             {/* Render evaluation feedback for student answers */}
                                             {feedback && (
-                                                <div className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-4 text-xs text-slate-350 space-y-3 animate-fade-in max-w-lg">
+                                                <div className="bg-slate-950/60 border border-slate-800/85 rounded-2xl p-4 text-xs text-slate-300 space-y-3 animate-fade-in max-w-lg shadow-xl">
                                                     <div className="flex justify-between items-center border-b border-slate-800/60 pb-2">
                                                         <span className="font-bold text-slate-200 flex items-center gap-1.5">
                                                             <Award className="w-3.5 h-3.5 text-indigo-400" />
@@ -263,7 +263,7 @@ export default function Chatbot() {
                                                             feedback.rating === 'Excellent' 
                                                                 ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
                                                                 : feedback.rating === 'Good'
-                                                                ? 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20'
+                                                                ? 'text-indigo-450 bg-indigo-500/10 border-indigo-500/20'
                                                                 : feedback.rating === 'Satisfactory'
                                                                 ? 'text-amber-400 bg-amber-500/10 border-amber-500/20'
                                                                 : 'text-red-400 bg-red-500/10 border-red-500/20'
@@ -290,7 +290,7 @@ export default function Chatbot() {
                                                             <span className="font-bold text-slate-400">Consider Mentioning:</span>
                                                             <div className="flex flex-wrap gap-1 mt-1">
                                                                 {feedback.missing_keywords.map((kw, kIdx) => (
-                                                                    <span key={kIdx} className="bg-slate-950 text-slate-500 px-2 py-0.5 rounded text-[10px] font-semibold border border-slate-850">
+                                                                    <span key={kIdx} className="bg-slate-950 text-slate-500 px-2 py-0.5 rounded text-[10px] font-semibold border border-slate-800">
                                                                         {kw}
                                                                     </span>
                                                                 ))}
@@ -312,13 +312,13 @@ export default function Chatbot() {
                             {/* Typing indicator bubble */}
                             {sendingMessage && (
                                 <div className="flex gap-3 max-w-[80%] mr-auto">
-                                    <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-emerald-500 text-white shrink-0 flex items-center justify-center text-xs font-black uppercase">
+                                    <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-500 to-fuchsia-500 text-white shrink-0 flex items-center justify-center text-xs font-black uppercase">
                                         AI
                                     </div>
-                                    <div className="bg-slate-900 border border-slate-800 text-slate-400 p-4 rounded-2xl rounded-tl-none flex items-center gap-1.5">
-                                        <div className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                                        <div className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                                        <div className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                                    <div className="bg-slate-950/60 border border-slate-800/80 text-slate-400 p-4 rounded-2xl rounded-tl-none flex items-center gap-1.5">
+                                        <div className="w-2 h-2 bg-indigo-450 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                                        <div className="w-2 h-2 bg-indigo-450 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                                        <div className="w-2 h-2 bg-indigo-450 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                                     </div>
                                 </div>
                             )}
@@ -327,7 +327,7 @@ export default function Chatbot() {
                         </div>
 
                         {/* Input Form at bottom */}
-                        <div className="bg-slate-900/60 border-t border-slate-800/80 px-6 py-4 shrink-0">
+                        <div className="bg-slate-950/50 border-t border-slate-800/50 px-6 py-4 shrink-0">
                             {currentSession?.is_completed ? (
                                 <div className="flex items-center justify-center gap-4 py-1 text-slate-350 text-xs">
                                     <CheckCircle className="w-5 h-5 text-emerald-400" />
@@ -341,13 +341,13 @@ export default function Chatbot() {
                                         onChange={(e) => setInputText(e.target.value)}
                                         placeholder="Type your detailed response here..."
                                         disabled={sendingMessage || !currentSession}
-                                        className="flex-1 bg-slate-950 border border-slate-800 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl px-4 py-3 text-slate-200 placeholder-slate-650 outline-none text-sm transition-all"
+                                        className="flex-1 bg-slate-950/80 border border-slate-800/80 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl px-4 py-3 text-slate-200 placeholder-slate-600 outline-none text-sm transition-all duration-300"
                                         required
                                     />
                                     <button
                                         type="submit"
                                         disabled={sendingMessage || !inputText.trim() || !currentSession}
-                                        className="bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-600/40 text-white px-5 py-3 rounded-xl transition-all flex items-center justify-center shrink-0"
+                                        className="bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600 disabled:opacity-50 text-white px-5 py-3 rounded-xl transition-all flex items-center justify-center shrink-0 cursor-pointer shadow-md"
                                     >
                                         <Send className="w-4 h-4" />
                                     </button>

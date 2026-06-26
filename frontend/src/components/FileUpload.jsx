@@ -72,18 +72,18 @@ export default function FileUpload({ onFileSelect, file, error, setError }) {
                 onClick={onButtonClick}
                 className={`w-full py-8 px-6 border-2 border-dashed rounded-2xl cursor-pointer flex flex-col items-center justify-center transition-all duration-300 ${
                     dragActive
-                        ? 'border-indigo-500 bg-indigo-600/10'
+                        ? 'border-indigo-500 bg-indigo-500/10 shadow-lg shadow-indigo-500/5 animate-pulse-ring'
                         : file
-                        ? 'border-emerald-500 bg-emerald-500/5'
-                        : 'border-slate-800 bg-slate-900/30 hover:border-slate-700'
+                        ? 'border-emerald-500 bg-emerald-500/5 shadow-lg shadow-emerald-500/5'
+                        : 'border-slate-800/80 bg-slate-950/40 hover:border-indigo-500/30 hover:bg-slate-950/60'
                 }`}
             >
                 {file ? (
                     <div className="flex flex-col items-center text-center">
-                        <div className="w-14 h-14 bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 rounded-2xl flex items-center justify-center mb-4">
-                            <File className="w-6 h-6" />
+                        <div className="w-14 h-14 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center mb-4">
+                            <File className="w-6 h-6 animate-pulse" />
                         </div>
-                        <h4 className="text-sm font-semibold text-slate-200 mb-1 max-w-[250px] truncate">
+                        <h4 className="text-sm font-semibold text-slate-200 mb-1 max-w-[250px] truncate font-heading">
                             {file.name}
                         </h4>
                         <p className="text-xs text-slate-400 mb-3">
@@ -95,11 +95,11 @@ export default function FileUpload({ onFileSelect, file, error, setError }) {
                         </span>
                     </div>
                 ) : (
-                    <div className="flex flex-col items-center text-center">
-                        <div className="w-14 h-14 bg-indigo-600/20 border border-indigo-500/30 text-indigo-400 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-105">
+                    <div className="flex flex-col items-center text-center group">
+                        <div className="w-14 h-14 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-105 group-hover:border-indigo-500/40">
                             <Upload className="w-6 h-6" />
                         </div>
-                        <h4 className="text-sm font-semibold text-slate-200 mb-1">
+                        <h4 className="text-sm font-semibold text-slate-200 mb-1 font-heading">
                             Drag & drop your resume file
                         </h4>
                         <p className="text-xs text-slate-400 mb-4">
@@ -107,7 +107,7 @@ export default function FileUpload({ onFileSelect, file, error, setError }) {
                         </p>
                         <button
                             type="button"
-                            className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all shadow-md shadow-indigo-600/10"
+                            className="bg-indigo-500 hover:bg-indigo-600 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all shadow-md shadow-indigo-500/20 cursor-pointer border border-indigo-500/30"
                         >
                             Browse Files
                         </button>
